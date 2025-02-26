@@ -1,0 +1,5 @@
+dataVencimento,dataPagamento,valor,descricao,situacao
+2025-02-25,2025-02-26,100.50,Conta de Luz,Pago
+2025-03-10,2025-03-12,250.75,Conta de Internet,Pago
+2025-04-01,,150.00,Conta de Água,Pendente
+2025-01-01,,150.00,Conta de Água,Atrasado
