@@ -13,6 +13,7 @@ Aplicação Web Api Rest de gerenciamento de contas.
 - implementação de importação de dados via csv
 - implementação de testes unitários
 - utilizando versões mais atualizadas das tecnologias.
+
 ![img.png](files/swagger.png)
 
 ## Tecnologias
