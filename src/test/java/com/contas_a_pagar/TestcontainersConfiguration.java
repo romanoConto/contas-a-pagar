@@ -1,0 +1,8 @@
+package com.contas_a_pagar;
+
+import org.springframework.boot.test.context.TestConfiguration;
+
+@TestConfiguration(proxyBeanMethods = false)
+class TestcontainersConfiguration {
+
+}

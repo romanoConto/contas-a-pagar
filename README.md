@@ -20,6 +20,7 @@ Aplicação web api simples de gerenciamento de contas, contendo api Rest com do
 * [Spring Doc](https://springdoc.org)
 * [Spring Data JPA](https://docs.spring.io/spring-boot/3.4.3/reference/data/sql.html#data.sql.jpa-and-spring-data)
 * [Spring Security](https://spring.io/projects/spring-security)
+* [Testcontainers](https://docs.spring.io/spring-boot/reference/testing/testcontainers.html)
 * [Opencsv](https://opencsv.sourceforge.net)
 * [OAuth 2.0 Resource Server](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html)
 * [Flyway Migration](https://docs.spring.io/spring-boot/3.4.3/how-to/data-initialization.html#howto.data-initialization.migration-tool.flyway)
