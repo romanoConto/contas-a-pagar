@@ -37,8 +37,8 @@ public class ContaService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public Page<ContaResponse> getAll(int pagina, int items) {
-        Page<Conta> contas = repository.findAll(PageRequest.of(pagina, items));
+    public Page<ContaResponse> getAll(int pagina, int itens) {
+        Page<Conta> contas = repository.findAll(PageRequest.of(pagina, itens));
         return contas.map(x -> modelMapper.map(x, ContaResponse.class));
     }
 
@@ -49,8 +49,8 @@ public class ContaService {
         return modelMapper.map(conta, ContaResponse.class);
     }
 
-    public Page<ContaResponse> getContasAPagar(int pagina, int items, String descricao, LocalDate dataVencimentoInicial, LocalDate dataVencimentoFinal) {
-        Page<Conta> contas = repository.findAll(ContaSpec.porContasAPagar(descricao, dataVencimentoInicial, dataVencimentoFinal), PageRequest.of(pagina, items));
+    public Page<ContaResponse> getContasAPagar(int pagina, int itens, String descricao, LocalDate dataVencimentoInicial, LocalDate dataVencimentoFinal) {
+        Page<Conta> contas = repository.findAll(ContaSpec.porContasAPagar(descricao, dataVencimentoInicial, dataVencimentoFinal), PageRequest.of(pagina, itens));
         return contas.map(x -> modelMapper.map(x, ContaResponse.class));
     }
 

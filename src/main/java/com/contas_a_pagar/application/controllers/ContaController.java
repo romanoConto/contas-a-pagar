@@ -32,8 +32,8 @@ public class ContaController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ContaResponse>> getAll(@RequestParam int pagina, @RequestParam int items) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getAll(pagina, items));
+    public ResponseEntity<Page<ContaResponse>> getAll(@RequestParam int pagina, @RequestParam int itens) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getAll(pagina, itens));
     }
 
     @GetMapping("/{id}")
@@ -42,11 +42,11 @@ public class ContaController {
     }
 
     @GetMapping("/contas-a-pagar")
-    public ResponseEntity<Page<ContaResponse>> getContasAPagar(@RequestParam int pagina, @RequestParam int items,
+    public ResponseEntity<Page<ContaResponse>> getContasAPagar(@RequestParam int pagina, @RequestParam int itens,
                                                                @RequestParam(value = "descricao", required = false) String descricao,
                                                                @RequestParam(value = "dataVencimentoInicial", required = false) LocalDate dataVencimentoInicial,
                                                                @RequestParam(value = "dataVencimentoFinal", required = false) LocalDate dataVencimentoFinal) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getContasAPagar(pagina, items, descricao, dataVencimentoInicial, dataVencimentoFinal));
+        return ResponseEntity.status(HttpStatus.OK).body(service.getContasAPagar(pagina, itens, descricao, dataVencimentoInicial, dataVencimentoFinal));
     }
 
     @GetMapping("/valor-total-periodo")

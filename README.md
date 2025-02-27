@@ -5,9 +5,15 @@
 Romano de Conto Pasqualotto - [Linkedin](www.linkedin.com/in/romano-de-conto-pasqualotto)
 
 ## Intro
-Desafio proposto pela TOTVS:
 
-Aplicação web api simples de gerenciamento de contas, contendo api Rest com documentação swagger, implementação de autenticação basic e jwt (utilizando basic nas requisicoes do swagger), utilizando versões mais atualizadas das tecnologias.
+Aplicação Web Api Rest de gerenciamento de contas.
+- documentação swagger
+- implementação de autenticação basic (para acesso a rota de autenticação)
+- implementação de autenticação jwt
+- implementação de importação de dados via csv
+- implementação de testes unitários
+- utilizando versões mais atualizadas das tecnologias.
+![img.png](files/swagger.png)
 
 ## Tecnologias
 
@@ -30,50 +36,22 @@ Aplicação web api simples de gerenciamento de contas, contendo api Rest com do
 
 - Clonar repositório git:
 
-```
-git clone https://github.com/romanoConto/contas-a-pagar.git
-```
+```git clone https://github.com/romanoConto/contas-a-pagar.git```
 
 - Instalar o apache-maven-3.9.9
-```
-https://maven.apache.org/download.cgi
-```
+```https://maven.apache.org/download.cgi```
 
 - Instalar o Java 23-jdk
-```
-https://www.oracle.com/br/java/technologies/downloads/#java23
-```
+```https://www.oracle.com/br/java/technologies/downloads/#java23```
 
 - Instalar o docker
-```
-https://www.docker.com
-```
+```https://www.docker.com```
 
 - Instalar o docker-compose 
-```
-https://docs.docker.com/compose/
- ```
+```https://docs.docker.com/compose/ ```
 
 - Debugar pela IDE ou executar pelo comando
-```
-mvn sprin-boot:run
-```
-
-- Acessar o swagger
-```
-http://localhost:8080/swagger-ui/index.html#
-```
-
-- Utilizar as credenciais do usuario inicial
-```
-usuario:admin
-senha:admin
-```
-
-- Deslogar:
-```
-logout:logout@http://localhost:8080/swagger-ui/index.html#
-```
+```mvn sprin-boot:run```
 
 ## Como gerar artefato e rodar api no docker:
 
@@ -81,42 +59,122 @@ Para coseguir executar o comando mvn clean install é necessario ter o banco de 
 
 - Abrir 2 terminais
 - No terminal 1 executar o comando para subir o banco de dados:
-```
-docker-compose up
-```
+```docker-compose up```
 
 - No terminal 2 executar para gerar o artefato:
-```
-mvn clean install
-```
+```mvn clean install```
 
 - No terminal 1 parar a execução do docker com o comando:
-```
-ctrl+c
-```
+```ctrl+c```
 
 - No terminal 2 executar o comando para gerar a imagem do docker:
-```
-docker build -t contas-a-pagar-api .
-```
+```docker build -t contas-a-pagar-api .```
 
 - No terminal 2 executar a api:
-```
-docker-compose -f compose-api.yaml up --build
-```
+```docker-compose -f compose-api.yaml up --build```
 
-- Logar
-```
-usuario: admin
-senha: admin
-```
+## Autenticar na api via swagger
 
-- Testar:
+- Acessar o swagger
+```http://localhost:8080/swagger-ui/index.html#```
 
-``` 
-http://localhost:8080/swagger-ui/index.html#
-```
-- Deslogar:
-```
-logout:logout@http://localhost:8080/swagger-ui/index.html#
-```
+- Utilizar as credenciais do usuario inicial (utilizar autenticação basic)
+- usuario e senha:
+```usuario:admin```
+```senha:admin```
+
+![img_1.png](files/autenticacao_basic.png)
+
+- Apos adicionar as credenciais basic, fazer requisicao para obter o jwt para utilizar demais endpoints
+```/api/v1/auth/authenticate```
+
+![img_2.png](files/obter_jwt.png)
+
+- Apos obter o jwt do enpoint authenticate, adicionar na autenticação bearerAuth 
+
+![img_3.png](files/adicionar_jwt.png)
+
+- Com isso está autenticado para utilizar todos enpoints!
+
+## Importar dados via csv
+- Autenticar seguindo a etapa anterior
+
+- Fazer requisição para baixar o arquivo modelo do csv pelo enpoint:
+```/api/v1/contas/baixar-modelo-csv```
+
+![img_5.png](files/baixar_modelo_csv.png)
+
+- Abrir arquivo e inserir dados mantendo o padrão (dataVencimento, dataPagamento, valor, descricao, situacao).
+
+![img.png](files/formato_dados_csv.png)
+
+- O único campo que pode ficar em branco é o dataPagamento.
+- No campo situação, pode ter os seguintes valores:
+```Atrasado```
+```Pago```
+```Pendente```
+
+- Adicionar arquivo csv e fazer importação pelo enpoint
+
+![img_1.png](files/adicionar_csv.png)
+
+## Listando contas
+- Para listar as contas, deve ser feita requisição para o enpoint
+```/api/v1/contas```
+- Os parametros de paginação sao obrigatórios
+
+![img_3.png](files/paginacao_obrigatoria.png)
+
+- Para acessar a primeira página, basta enviar 0 e adicionar o numero de itens desejado
+
+![img_4.png](files/resultado_lista_contas.png)
+
+- Junto com os dados solicitados, a api retorna informações sobre paginação
+
+![img_5.png](files/informacoes_paginacao.png)
+
+```{
+  "content": [
+    {
+      "dataVencimento": "2025-02-25",
+      "dataPagamento": "2025-02-26",
+      "valor": 100.5,
+      "descricao": "Conta de Luz",
+      "situacao": "Pago",
+      "id": 55
+    },
+    {
+      "dataVencimento": "2025-03-10",
+      "dataPagamento": "2025-03-12",
+      "valor": 250.75,
+      "descricao": "Conta de Internet",
+      "situacao": "Pago",
+      "id": 56
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 2,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": false,
+  "totalPages": 3,
+  "totalElements": 5,
+  "size": 2,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "first": true,
+  "numberOfElements": 2,
+  "empty": false
+}```
