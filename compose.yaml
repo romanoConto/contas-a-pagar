@@ -5,6 +5,7 @@ services:
       - 'POSTGRES_DB=contas-a-pagar'
       - 'POSTGRES_PASSWORD=postgres'
       - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_TEST_DB=contas-a-pagar-test' #Banco de dados de testes
     ports:
       - '5432:5432'
 

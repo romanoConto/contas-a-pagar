@@ -20,6 +20,16 @@ public class Conta {
     private String descricao;
     private Situacao situacao;
 
+    public Conta(){}
+
+    public Conta(LocalDate dataVencimento, LocalDate dataPagamento, BigDecimal valor, String descricao, Situacao situacao) {
+        this.dataVencimento = dataVencimento;
+        this.dataPagamento = dataPagamento;
+        this.valor = valor;
+        this.descricao = descricao;
+        this.situacao = situacao;
+    }
+
     public Integer getId() {
         return id;
     }
