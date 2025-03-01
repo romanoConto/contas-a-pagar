@@ -20,7 +20,8 @@ public class Conta {
     private String descricao;
     private Situacao situacao;
 
-    public Conta(){}
+    public Conta() {
+    }
 
     public Conta(LocalDate dataVencimento, LocalDate dataPagamento, BigDecimal valor, String descricao, Situacao situacao) {
         this.dataVencimento = dataVencimento;

@@ -12,22 +12,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class ContasAPagarApplication {
 
-	@Autowired
-	UsuarioRepository usuarioRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(ContasAPagarApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ContasAPagarApplication.class, args);
+    }
 
-	@Bean
-	ApplicationRunner runner(PasswordEncoder passwordEncoder) {
-		if (usuarioRepository.findAll().isEmpty()) {
-			Usuario usuario = new Usuario();
-			usuario.setLogin("admin");
-			usuario.setSenha(passwordEncoder.encode("admin"));
-			usuarioRepository.save(usuario);
-		}
-		// Encripted password for user using BCrypt encoder
-		return args -> System.out.println("password: " + passwordEncoder.encode("admin"));
-	}
+    @Bean
+    ApplicationRunner runner(PasswordEncoder passwordEncoder) {
+        if (usuarioRepository.findAll().isEmpty()) {
+            Usuario usuario = new Usuario();
+            usuario.setLogin("admin");
+            usuario.setSenha(passwordEncoder.encode("admin"));
+            usuarioRepository.save(usuario);
+        }
+        // Encripted password for user using BCrypt encoder
+        return args -> System.out.println("password: " + passwordEncoder.encode("admin"));
+    }
 }

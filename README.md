@@ -7,6 +7,7 @@ Romano de Conto Pasqualotto - [Linkedin](www.linkedin.com/in/romano-de-conto-pas
 ## Intro
 
 Aplicação Web Api Rest de gerenciamento de contas.
+
 - documentação swagger
 - implementação de autenticação basic (para acesso a rota de autenticação)
 - implementação de autenticação jwt
@@ -40,68 +41,71 @@ Aplicação Web Api Rest de gerenciamento de contas.
 ```git clone https://github.com/romanoConto/contas-a-pagar.git```
 
 - Instalar o apache-maven-3.9.9
-```https://maven.apache.org/download.cgi```
+  ```https://maven.apache.org/download.cgi```
 
 - Instalar o Java 23-jdk
-```https://www.oracle.com/br/java/technologies/downloads/#java23```
+  ```https://www.oracle.com/br/java/technologies/downloads/#java23```
 
 - Instalar o docker
-```https://www.docker.com```
+  ```https://www.docker.com```
 
-- Instalar o docker-compose 
-```https://docs.docker.com/compose/ ```
+- Instalar o docker-compose
+  ```https://docs.docker.com/compose/ ```
 
 - Debugar pela IDE ou executar pelo comando
-```mvn sprin-boot:run```
+  ```mvn sprin-boot:run```
 
 ## Como gerar artefato e rodar api no docker:
 
-Para coseguir executar o comando mvn clean install é necessario ter o banco de dados no ar, entao para conseguir gerar o artefato, e depois rodar toda a aplicação em um unico container, vamos precisar de dois terminais e executar na sequencia correta.
+Para coseguir executar o comando mvn clean install é necessario ter o banco de dados no ar, entao para conseguir gerar o
+artefato, e depois rodar toda a aplicação em um unico container, vamos precisar de dois terminais e executar na
+sequencia correta.
 
 - Abrir 2 terminais
 - No terminal 1 executar o comando para subir o banco de dados:
-```docker-compose up```
+  ```docker-compose up```
 
 - No terminal 2 executar para gerar o artefato:
-```mvn clean install```
+  ```mvn clean install```
 
 - No terminal 1 parar a execução do docker com o comando:
-```ctrl+c```
+  ```ctrl+c```
 
 - No terminal 2 executar o comando para gerar a imagem do docker:
-```docker build -t contas-a-pagar-api .```
+  ```docker build -t contas-a-pagar-api .```
 
 - No terminal 2 executar a api:
-```docker-compose -f compose-api.yaml up --build```
+  ```docker-compose -f compose-api.yaml up --build```
 
 ## Autenticar na api via swagger
 
 - Acessar o swagger
-```http://localhost:8080/swagger-ui/index.html#```
+  ```http://localhost:8080/swagger-ui/index.html#```
 
 - Utilizar as credenciais do usuario inicial (utilizar autenticação basic)
 - usuario e senha:
-```usuario:admin```
-```senha:admin```
+  ```usuario:admin```
+  ```senha:admin```
 
 ![img_1.png](files/autenticacao_basic.png)
 
 - Apos adicionar as credenciais basic, fazer requisicao para obter o jwt para utilizar demais endpoints
-```/api/v1/auth/authenticate```
+  ```/api/v1/auth/authenticate```
 
 ![img_2.png](files/obter_jwt.png)
 
-- Apos obter o jwt do enpoint authenticate, adicionar na autenticação bearerAuth 
+- Apos obter o jwt do enpoint authenticate, adicionar na autenticação bearerAuth
 
 ![img_3.png](files/adicionar_jwt.png)
 
 - Com isso está autenticado para utilizar todos enpoints!
 
 ## Importar dados via csv
+
 - Autenticar seguindo a etapa anterior
 
 - Fazer requisição para baixar o arquivo modelo do csv pelo enpoint:
-```/api/v1/contas/baixar-modelo-csv```
+  ```/api/v1/contas/baixar-modelo-csv```
 
 ![img_5.png](files/baixar_modelo_csv.png)
 
@@ -111,17 +115,18 @@ Para coseguir executar o comando mvn clean install é necessario ter o banco de 
 
 - O único campo que pode ficar em branco é o dataPagamento.
 - No campo situação, pode ter os seguintes valores:
-```Atrasado```
-```Pago```
-```Pendente```
+  ```Atrasado```
+  ```Pago```
+  ```Pendente```
 
 - Adicionar arquivo csv e fazer importação pelo enpoint
 
 ![img_1.png](files/adicionar_csv.png)
 
 ## Listando contas
+
 - Para listar as contas, deve ser feita requisição para o enpoint
-```/api/v1/contas```
+  ```/api/v1/contas```
 - Os parametros de paginação sao obrigatórios
 
 ![img_3.png](files/paginacao_obrigatoria.png)
@@ -181,3 +186,9 @@ Para coseguir executar o comando mvn clean install é necessario ter o banco de 
   "empty": false
 }
 ```
+
+## Testes unitários implementados
+
+- Foi implementado diversos testes unitários, possibilitando testar desde a controller até o banco de dados.
+
+![img.png](files/testes_unitarios.png)

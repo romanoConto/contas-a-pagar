@@ -8,13 +8,13 @@ import org.testcontainers.utility.DockerImageName;
 
 public class TestContasAPagarApplication {
 
-	@Bean
-	@ServiceConnection
-	PostgreSQLContainer<?> postgresContainer() {
-		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
-	}
+    @Bean
+    @ServiceConnection
+    PostgreSQLContainer<?> postgresContainer() {
+        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.from(ContasAPagarApplication::main).with(TestcontainersConfiguration.class).run(args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.from(ContasAPagarApplication::main).with(TestcontainersConfiguration.class).run(args);
+    }
 }

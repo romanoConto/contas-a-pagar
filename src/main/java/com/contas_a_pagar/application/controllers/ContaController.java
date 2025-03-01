@@ -6,8 +6,6 @@ import com.contas_a_pagar.application.dto.conta.UpdateRequest;
 import com.contas_a_pagar.domain.enums.Situacao;
 import com.contas_a_pagar.domain.services.ContaService;
 import com.opencsv.exceptions.CsvValidationException;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -89,7 +87,7 @@ public class ContaController {
         }
     }
 
-    @PostMapping(value = "/importar-por-csv",  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/importar-por-csv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> importarPorCsv(@RequestParam("file") MultipartFile file) {
         try {
             service.importarPorCsv(file);

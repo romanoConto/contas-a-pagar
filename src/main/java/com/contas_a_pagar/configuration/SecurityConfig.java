@@ -31,8 +31,6 @@ import org.springframework.security.web.header.writers.XXssProtectionHeaderWrite
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -86,7 +84,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request.anyRequest().authenticated())
                 .csrf(CsrfConfigurer::disable)
                 .httpBasic(h -> h.authenticationEntryPoint(this.authenticationEntryPoint))
-                .sessionManagement(session ->  session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 

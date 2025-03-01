@@ -9,13 +9,11 @@ import java.util.Objects;
 
 public class ContaSpec {
 
-    public static Specification<Conta> porContasAPagar(String descricao, LocalDate dataInicialVencimento, LocalDate datafinalVencimento)
-    {
+    public static Specification<Conta> porContasAPagar(String descricao, LocalDate dataInicialVencimento, LocalDate datafinalVencimento) {
         return porDescricao(descricao).and(porSituacaoDiferenteDe(Situacao.Pago)).and(aposVencimento(dataInicialVencimento)).and(antesVencimento(datafinalVencimento));
     }
 
-    public static Specification<Conta> porValorTotalPeriodo(LocalDate dataInicialPagamento, LocalDate dataFinalPagamento)
-    {
+    public static Specification<Conta> porValorTotalPeriodo(LocalDate dataInicialPagamento, LocalDate dataFinalPagamento) {
         return porSituacao(Situacao.Pago).and(antesDataPagamento(dataFinalPagamento)).and(aposDataPagamento(dataInicialPagamento));
     }
 
